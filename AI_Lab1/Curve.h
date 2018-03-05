@@ -10,7 +10,7 @@ class Curve
 	double m_fitness;
 
 public:
-	Curve(int degree);
+	Curve(int degree, int minCoefficient, int maxCoefficient);
 	Curve(std::vector<Coefficient*> *coefficients);
 	int getDegree();
 	Coefficient *getCoefficientAt(unsigned int idx);

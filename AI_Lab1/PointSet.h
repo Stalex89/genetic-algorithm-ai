@@ -12,10 +12,10 @@ class PointSet
 public:
 	PointSet(int pointNum, bool isPositive);
 	std::vector<Point> getPoints();
-	~PointSet();
-	int getPointsetSize();
 	Point getPoint(unsigned int idx);
+	int getPointsetSize();
 	void printSet();
+	~PointSet();
 };
 
 

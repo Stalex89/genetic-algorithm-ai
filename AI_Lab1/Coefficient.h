@@ -10,7 +10,7 @@ class Coefficient
 	std::deque<int> m_binaryRep;
 
 public:
-	Coefficient();
+	Coefficient(int min, int max, bool canBeZero);
 	Coefficient(int number);
 	Coefficient(std::deque<int> binaryNum);
 	void setNumber(int number);

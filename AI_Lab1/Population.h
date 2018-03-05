@@ -11,7 +11,7 @@ class Population
 
 
 public:
-	Population(int populationSize, int degree);
+	Population(int populationSize, int degree, int minCoefficient, int maxCoefficient);
 	Population(std::vector<Curve*> *generationSet);
 	//Population(int populationSize, int degree, std::vector<Curve> &populationSet);
 	int getPopulationSize();

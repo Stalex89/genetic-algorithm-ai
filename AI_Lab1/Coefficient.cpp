@@ -10,9 +10,17 @@ int binaryToDecimal(std::deque<int> bits);
 void invertBit(int &bit);
 
 // Generates random coefficient in binary representation (range between -127 to 127)
-Coefficient::Coefficient()
+Coefficient::Coefficient(int min, int max, bool canBeZero)
 {
-	m_number = getRandomNumber(1, 20);
+	if (canBeZero == false)
+	{
+		do
+			m_number = getRandomNumber(min, max);
+		while (m_number == 0);
+	}
+	else
+		m_number = getRandomNumber(min, max);
+
 	m_binaryRep = decimalToBinary(m_number);
 }
 

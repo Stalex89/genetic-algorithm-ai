@@ -2,12 +2,12 @@
 #include "Population.h"
 
 
-Population::Population(int populationSize, int degree) : m_populationSize(populationSize)
+Population::Population(int populationSize, int degree, int minCoefficient, int maxCoefficient) : m_populationSize(populationSize)
 {
 	m_generationNum++;
 	m_populationSet = new std::vector<Curve*>();
 	for (int i = 0; i < m_populationSize; i++)
-		m_populationSet->push_back(new Curve(degree));
+		m_populationSet->push_back(new Curve(degree, minCoefficient, maxCoefficient));
 }
 
 Population::Population(std::vector<Curve*> *generationSet)

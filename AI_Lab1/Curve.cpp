@@ -4,13 +4,17 @@
 #include <exception>
 
 // Generate a curve of n degree with random coefficients 
-Curve::Curve(int degree) : m_degree(degree)
+Curve::Curve(int degree, int minCoefficient, int maxCoefficient) : m_degree(degree)
 {
 	m_fitness = 0;
 	m_coefficients = new std::vector<Coefficient*>();
-	for (int i = 0; i < degree+1; i++)
+
+	// First coefficient shild be other than zero
+	m_coefficients->push_back(new Coefficient(minCoefficient, maxCoefficient, false));
+
+	for (int i = 0; i < degree; i++)
 	{
-		m_coefficients->push_back(new Coefficient());
+		m_coefficients->push_back(new Coefficient(minCoefficient,maxCoefficient,true));
 	}
 }
 
