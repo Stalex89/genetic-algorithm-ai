@@ -2,12 +2,12 @@
 #include "Point.h"
 #include "PointSet.h"
 
-PointSet::PointSet(int pointNum, bool isPositive) : m_isPositive(isPositive)
+PointSet::PointSet(int pointNum, bool isPositive, double minX, double maxX, double minY, double maxY) : m_isPositive(isPositive)
 {
 	m_pointSet = new std::vector<Point>();
 	
 	for(int i = 0; i < pointNum; i++)
-		m_pointSet->push_back(Point(isPositive));
+		m_pointSet->push_back(Point(isPositive, minX, maxX, minY, maxY));
 }
 
 void PointSet::printSet()

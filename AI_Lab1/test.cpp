@@ -2,14 +2,13 @@
 #include "stdafx.h"
 
 //std::cout << "Positive set: " << "\n";
-//PointSet *p1 = new PointSet(10, true);
+//PointSet *p1 = new PointSet(positivePointsSize, true, pointMinX, pointMaxX, pointMinY, pointMaxY);
 //p1->printSet();
 //std::cout << '\n';
 //std::cout << "Negative set: " << "\n";
-//PointSet *p2 = new PointSet(10, false);
+//PointSet *p2 = new PointSet(negativePointsSize, false, pointMinX, pointMaxX, pointMinY, pointMaxY);
 //p2->printSet();
 //std::cout << '\n';
-//
 //delete p1;
 //p1 = nullptr;
 //delete p2;

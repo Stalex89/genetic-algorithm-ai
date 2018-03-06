@@ -2,13 +2,13 @@
 #include "Point.h"
 
 // Generates random positive or negative point
-Point::Point(bool isPositive)
+Point::Point(bool isPositive, double minX, double maxX, double minY, double maxY)
 {
 	if (isPositive)
-		m_x = getRandomNumber(-10.0, -1.0);
+		m_x = getRandomNumber(minX, -1.0);
 	else
-		m_x = getRandomNumber(1.0, 10.0);
-	m_y = getRandomNumber(0.0, 10.0);
+		m_x = getRandomNumber(1.0, maxX);
+	m_y = getRandomNumber(minY, maxY);
 }
 
 Point::Point(double x, double y) : m_x(x), m_y(y) {}

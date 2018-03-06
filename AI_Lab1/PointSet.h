@@ -10,7 +10,7 @@ class PointSet
 	bool m_isPositive;
 
 public:
-	PointSet(int pointNum, bool isPositive);
+	PointSet(int pointNum, bool isPositive, double minX, double maxX, double minY, double maxY);
 	std::vector<Point> getPoints();
 	Point getPoint(unsigned int idx);
 	int getPointsetSize();
