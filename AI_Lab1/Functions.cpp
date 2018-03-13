@@ -6,6 +6,7 @@
 #include "Functions.h"
 #include "RandomNumberGenerator.h"
 
+bool isPointPositiveFirstDegree(double x, double y, Curve &curve);
 bool isPointPositiveSecondDegree(double x, double y, Curve &curve);
 bool isPointPositiveThirdDegree(double x, double y, Curve &curve);
 bool isPointPositiveFourthDegree(double x, double y, Curve &curve);
@@ -23,6 +24,9 @@ double calculateFitness(Curve &curve, PointSet &positiveSet, PointSet &negativeS
 	// calculate fitness basing on the degree of polynomial
 	switch (curveDegree)
 	{
+		case 1:
+			fcnPtr = isPointPositiveFirstDegree;
+			break;
 		case 2:
 			fcnPtr = isPointPositiveSecondDegree;
 			break;
@@ -45,12 +49,12 @@ double calculateFitness(Curve &curve, PointSet &positiveSet, PointSet &negativeS
 
 	// Iterate throught the positive set
 	for (int i = 0; i < positivesetSize; i++)
-		if (fcnPtr(positiveSet.getPoint(i).getX(), positiveSet.getPoint(i).getY(), curve))
+		if (fcnPtr(positiveSet.getPointAt(i).getX(), positiveSet.getPointAt(i).getY(), curve))
 			fitnessScore++;
 
 	// Iterate throught the negative set
 	for (int i = 0; i < negativesetSize; i++)
-		if (!(fcnPtr(negativeSet.getPoint(i).getX(), negativeSet.getPoint(i).getY(), curve)))
+		if (!(fcnPtr(negativeSet.getPointAt(i).getX(), negativeSet.getPointAt(i).getY(), curve)))
 			fitnessScore++;
 
 	//std::cout << "fitness score = " << fitnessScore << ", number of points = " 
@@ -60,6 +64,12 @@ double calculateFitness(Curve &curve, PointSet &positiveSet, PointSet &negativeS
 	double finalFitness = (double)fitnessScore / (positivesetSize + negativesetSize);
 
 	return finalFitness;
+}
+
+bool isPointPositiveFirstDegree(double x, double y, Curve &curve)
+{
+	return (y > (curve.getCoefficientAt(0)->getNumber() * x +
+		curve.getCoefficientAt(1)->getNumber()));
 }
 
 bool isPointPositiveSecondDegree(double x, double y, Curve &curve)

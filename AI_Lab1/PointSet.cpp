@@ -24,7 +24,7 @@ int PointSet::getPointsetSize()
 	return m_pointSet->size();
 }
 
-Point PointSet::getPoint(unsigned int idx)
+Point PointSet::getPointAt(unsigned int idx)
 {
 	return m_pointSet->at(idx);
 }

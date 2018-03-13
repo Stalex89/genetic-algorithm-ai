@@ -9,11 +9,13 @@ std::deque<int> decimalToBinary(int number);
 int binaryToDecimal(std::deque<int> bits);
 void invertBit(int &bit);
 
-// Generates random coefficient in binary representation (range between -127 to 127)
+// Generates random coefficient in binary representation
 Coefficient::Coefficient(int min, int max, bool canBeZero)
 {
+	// If coefficient can nit be zero
 	if (canBeZero == false)
 	{
+		// If generated number is zero, generate one more time
 		do
 			m_number = getRandomNumber(min, max);
 		while (m_number == 0);
@@ -153,6 +155,19 @@ void Coefficient::mutateCoefficient(std::array<int, 8> mutationBits)
 			invertBit(m_binaryRep.at(i));
 		}
 	m_number = binaryToDecimal(m_binaryRep);	
+}
+
+void Coefficient::mutateCoefficient()
+{
+	// Mutation is possible on every bit except the last one (to exclude mutation to zero)
+	for (unsigned int i = 0; i < m_binaryRep.size()-1; i++)
+
+		if (getRandomNumber(0.0, 1.0) < 0.5)
+		{
+			//std::cout << "mutate bit #" << i << '\n';
+			invertBit(m_binaryRep.at(i));
+		}
+	m_number = binaryToDecimal(m_binaryRep);
 }
 
 
