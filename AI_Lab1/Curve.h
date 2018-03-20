@@ -3,6 +3,8 @@
 #include "Coefficient.h"
 #include <vector>
 
+
+// A cromosome (one of the solutions) to the given problem
 class Curve
 {
 	std::vector<Coefficient*> *m_coefficients;
@@ -13,7 +15,7 @@ public:
 	Curve(int degree, int minCoefficient, int maxCoefficient);
 	Curve(std::vector<Coefficient*> *coefficients);
 	int getDegree();
-	Coefficient *getCoefficientAt(unsigned int idx);
+	Coefficient* getCoefficientAt(unsigned int idx);
 	std::vector<int> getDecimalCoefficients();
 	double getFitness();
 	void setFitness(double fitness);

@@ -6,6 +6,8 @@
 int binaryToDecimal(std::deque<int> bits);
 std::deque<int> decimalToBinary(int number);
 
+
+// Gene (one element position in chromosome)
 class Coefficient
 {
 	int m_number;

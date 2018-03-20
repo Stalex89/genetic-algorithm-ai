@@ -40,7 +40,7 @@ void Curve::setFitness(double fitness)
 	m_fitness = fitness;
 }
 
-Coefficient *Curve::getCoefficientAt(unsigned int idx)
+Coefficient* Curve::getCoefficientAt(unsigned int idx)
 {
 	return m_coefficients->at(idx);
 }

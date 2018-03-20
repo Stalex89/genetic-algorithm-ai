@@ -1,8 +1,5 @@
 #pragma once
 #include "stdafx.h"
-#include <cmath>
-#include <vector>
-#include <deque>
 #include "Functions.h"
 #include "RandomNumberGenerator.h"
 
@@ -100,90 +97,31 @@ bool isPointPositiveFifthDegree(double x, double y, Curve &curve)
 		curve.getCoefficientAt(5)->getNumber()));
 }
 
-std::vector<Curve*> createMatingPool(Population &population)
-{
-	std::vector<Curve*> *matingPool = new std::vector<Curve*>();
-
-	for (int i = 0; i < population.getPopulationSize(); i++)
-	{
-		// Calculate how much pieces ha	ve curve basing of the fitness;
-		int poolFraction = static_cast<int>(population.getCurveAt(i)->getFitness() * 100);
-		for (int j = 0; j < poolFraction; j++)
-		{
-			matingPool->push_back(population.getCurveAt(i));
-		}
-
-	}
-
-	return *matingPool;
-}
-
-
-// Crossover with binary exchange of genes
-//Curve* crossoverParents(Curve &parent1, Curve &parent2, double crossoverRate)
+//std::vector<Curve*> createMatingPool(Population &population)
 //{
-//	// a midpoint for taking genes from parent
-//	int genomeSize = parent1.getCoefficientAt(0)->getBinaryRep().size();
-//	int midpoint = floor(genomeSize * crossoverRate);
+//	std::vector<Curve*> *matingPool = new std::vector<Curve*>();
 //
-//	std::vector<Coefficient*> *childCoefficients = new std::vector<Coefficient*>();
-//
-//	int coefficientNum = parent1.getDegree() + 1;
-//
-//	for (int i = 0; i < coefficientNum; i++)
+//	for (int i = 0; i < population.getPopulationSize(); i++)
 //	{
-//		std::deque<int> parent1genes = parent1.getCoefficientAt(i)->getBinaryRep();
-//		std::deque<int> parent2genes = parent2.getCoefficientAt(i)->getBinaryRep();
-//		std::deque<int> childGenes;
-//
-//		for (int k = 0; k < genomeSize; k++)
+//		// Calculate how much pieces have curve basing of the fitness;
+//		int poolFraction = static_cast<int>(population.getCurveAt(i)->getFitness() * 100);
+//		for (int j = 0; j < poolFraction; j++)
 //		{
-//			if (k < midpoint) childGenes.push_back(parent1genes.at(k));
-//			else childGenes.push_back(parent2genes.at(k));
+//			matingPool->push_back(population.getCurveAt(i));
 //		}
 //
-//		childCoefficients->push_back(new Coefficient(childGenes));
 //	}
 //
-//	return new Curve(childCoefficients);
+//	return *matingPool;
 //}
 
 
-// Crossover with binary exchange of genes
-//Curve* crossoverParents(Curve &parent1, Curve &parent2, double crossoverRate)
-//{
-//	// a midpoint for taking genes from parent
-//	int genomeSize = parent1.getCoefficientAt(0)->getBinaryRep().size();
-//	int midPoint = floor(genomeSize * crossoverRate);
-//
-//	std::vector<Coefficient*> *childCoefficients = new std::vector<Coefficient*>();
-//
-//	int coefficientNum = parent1.getDegree() + 1;
-//
-//	for (int i = 0; i < coefficientNum; i++)
-//	{
-//		std::deque<int> parent1genes = parent1.getCoefficientAt(i)->getBinaryRep();
-//		std::deque<int> parent2genes = parent2.getCoefficientAt(i)->getBinaryRep();
-//		std::deque<int> childGenes;
-//
-//		for (int k = 0; k < genomeSize; k++)
-//		{
-//			if (k < midPoint) childGenes.push_back(parent1genes.at(k));
-//			else childGenes.push_back(parent2genes.at(k));
-//		}
-//
-//		childCoefficients->push_back(new Coefficient(childGenes));
-//	}
-//
-//	return new Curve(childCoefficients);
-//}
-
-// Crossover with binary exchange of genes
-Curve* crossoverParents(Curve &parent1, Curve &parent2, double crossoverRate)
+// Crossover with binary exchange of genes basic on the proportion 
+Curve* crossoverParents(Curve &parent1, Curve &parent2, double crossoverProportion)
 {
 	// a midpoint for taking genes from parent
 	int coefNum = parent2.getDegree() + 1;
-	int midPoint = static_cast<int>(floor(coefNum * crossoverRate));
+	int midPoint = static_cast<int>(floor(coefNum * crossoverProportion));
 
 	std::vector<Coefficient*> *childCoefficients = new std::vector<Coefficient*>();
 
@@ -195,3 +133,22 @@ Curve* crossoverParents(Curve &parent1, Curve &parent2, double crossoverRate)
 
 	return new Curve(childCoefficients);
 }
+
+// Crossover uniform distribution
+Curve* crossoverParents(Curve &parent1, Curve &parent2)
+{
+	int coefNum = parent2.getDegree() + 1;
+
+	std::vector<Coefficient*> *childCoefficients = new std::vector<Coefficient*>();
+
+	for (int i = 0; i < coefNum; i++)
+	{
+		if (getRandomNumber(0.0, 1.0) < 0.5) childCoefficients->push_back(new Coefficient(parent1.getCoefficientAt(i)->getNumber()));
+		else childCoefficients->push_back(new Coefficient(parent2.getCoefficientAt(i)->getNumber()));
+	}
+
+	return new Curve(childCoefficients);
+}
+
+
+

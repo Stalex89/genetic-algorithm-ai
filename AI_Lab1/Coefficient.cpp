@@ -12,16 +12,11 @@ void invertBit(int &bit);
 // Generates random coefficient in binary representation
 Coefficient::Coefficient(int min, int max, bool canBeZero)
 {
-	// If coefficient can nit be zero
-	if (canBeZero == false)
+	// If coefficient can not be zero, generate number one more time
+	do 
 	{
-		// If generated number is zero, generate one more time
-		do
-			m_number = getRandomNumber(min, max);
-		while (m_number == 0);
-	}
-	else
 		m_number = getRandomNumber(min, max);
+	} while (m_number == 0 && !canBeZero);
 
 	m_binaryRep = decimalToBinary(m_number);
 }
@@ -167,6 +162,10 @@ void Coefficient::mutateCoefficient()
 			//std::cout << "mutate bit #" << i << '\n';
 			invertBit(m_binaryRep.at(i));
 		}
+
+	if (m_binaryRep.at(m_binaryRep.size() - 1) == 0)
+		m_binaryRep.at(m_binaryRep.size() - 1) = 1;
+
 	m_number = binaryToDecimal(m_binaryRep);
 }
 

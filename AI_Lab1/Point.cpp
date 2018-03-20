@@ -1,27 +1,28 @@
 #include "stdafx.h"
 #include "Point.h"
 
-// Generates random positive or negative point
+// Generates random positive or negative point depending on the isPositive value
 Point::Point(bool isPositive, double minX, double maxX, double minY, double maxY)
 {
-	//if (isPositive)
-	//	m_x = getRandomNumber(minX, -1.0);
-	//else
-	//	m_x = getRandomNumber(1.0, maxX);
-	//m_y = getRandomNumber(minY, maxY);
-
-	
 	if (isPositive)
-	{
-		m_x = getRandomNumber(minX, -5.0);
-		m_y = getRandomNumber(m_x + 5.0, maxY);
-	}
-
+		m_x = getRandomNumber(minX, -1.0);
 	else
-	{
-		m_x = getRandomNumber(5.0, maxX);
-		m_y = getRandomNumber(minY, m_x - 5.0);
-	}
+		m_x = getRandomNumber(1.0, maxX);
+	m_y = getRandomNumber(minY, maxY);
+	
+
+	//if (isPositive)
+	//{
+	//	m_x = getRandomNumber(minX, 1.0);
+	//	m_y = getRandomNumber(m_x, maxY);
+	//}
+
+	//else
+	//{
+	//	m_x = getRandomNumber(-1.0, maxX);
+	//	m_y = getRandomNumber(minY, m_x);
+	//}
+
 }
 
 Point::Point(double x, double y) : m_x(x), m_y(y) {}
